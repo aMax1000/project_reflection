@@ -139,7 +139,7 @@ main{
     padding-top: 4px;
     border-top: none;
     position: absolute;
-    left: -14px;
+    left: 0; /* ----------- HERE NEEDS FIXING, IT'S REALLY INCONSISTENT ACROSS DIFFERENT ELEMETNS --------------- */
     min-width: 100%;
 }
 .top-menu li {
@@ -159,14 +159,7 @@ main{
     padding: 16px;
     padding-top: 12px;
     border: var(--accent-border);
-    border-top: none;
 }
-/* .width-fix{
-    padding-left: 14px;
-    padding-right: 14px;
-    visibility: hidden;
-    height: 0;
-} */
 
 /* ----- LEFT MENU ----- */
 .left-menu{
