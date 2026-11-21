@@ -87,15 +87,16 @@ main{
 }
 
 /* ----- TOP MENU SUB MENUS ----- */
-.top-menu ul li {
+.top-menu ul li  {
     position: relative;
+    width: 100%;
 }
-.top-menu ul ul {
+.top-menu ul .sub-menu {
     display: none;
     position: absolute;
     top: 100%;
 }
-.top-menu ul ul li {
+.top-menu ul .sub-menu li {
     float: none;
     position: relative;
     border-top: 1px solid var(--secondary);
@@ -105,7 +106,7 @@ main{
         transition: var(--transition-fast);
     }
 }
-.top-menu ul ul li:hover {
+.top-menu ul .sub-menu li:hover {
     border-top: var(--accent-border);
     text-shadow: 0 0 20px var(--accent);
     transition: var(--transition-fast);
@@ -114,10 +115,10 @@ main{
         transform-origin: center;
     }
 }
-.top-menu ul ul li:hover + li {
+.top-menu ul .sub-menu li:hover + li {
     border-top: var(--accent-border);
 }
-.top-menu ul ul li:first-child{
+.top-menu ul .sub-menu li:first-child{
     border-top: none;
     padding-top: 6px;
 }
@@ -132,7 +133,7 @@ main{
     transition: var(--transition-fast);
     text-shadow: 0 0 20px var(--accent);
 }
-.top-menu ul li:hover>ul {
+.top-menu ul li:hover>.sub-menu {
     display: block;
     /* border: var(--accent-border); */
     padding-top: 4px;
@@ -160,6 +161,12 @@ main{
     border: var(--accent-border);
     border-top: none;
 }
+/* .width-fix{
+    padding-left: 14px;
+    padding-right: 14px;
+    visibility: hidden;
+    height: 0;
+} */
 
 /* ----- LEFT MENU ----- */
 .left-menu{
