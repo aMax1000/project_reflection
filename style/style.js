@@ -1,3 +1,4 @@
+// LIGHT AND DARK THEMES
 let light = document.getElementById("light");
 let dark = document.getElementById("dark");
 

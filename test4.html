@@ -6,18 +6,26 @@
     <title>Document</title>
 </head>
 <body>
-    <canvas id="Canvas" 
+    <canvas id="test2" 
             width="300" 
             height="300" 
             style="border:3px solid">
     </canvas>
-    <button id="rand">новая фигура</button>
+    <button id="new">новая фигура</button>
     <input autofocus=true name="rand" placeholder="4">
 
 </body>
-<script>
-    const canva = document.getElementById('Canvas');
-    const cont = test1.getContext('2d')
+<script src="justapi.js"></script>
+<script defer>
+    function wrapper(){
+        
+    }
+    const canva = document.getElementById('test2');
+    const cont = canva.getContext('2d')
+    cont.fillStyle="rgb(255,255,255)";
+    cont.fillRect(0, 0, 500, 500);
     var can=new Canvas(canva,75);
+    const but=document.getElementById("new")
+    but.addEventListener()
 </script>
 </html>
