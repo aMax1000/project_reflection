@@ -12,20 +12,33 @@
             style="border:3px solid">
     </canvas>
     <button id="new">новая фигура</button>
-    <input autofocus=true name="rand" placeholder="4">
+    <input autofocus=true name="rand" value="4">
 
 </body>
 <script src="justapi.js"></script>
 <script defer>
-    function wrapper(){
-        
-    }
+    const rand=document.getElementsByName("rand")[0]
+    console.log(rand)
     const canva = document.getElementById('test2');
     const cont = canva.getContext('2d')
     cont.fillStyle="rgb(255,255,255)";
     cont.fillRect(0, 0, 500, 500);
-    var can=new Canvas(canva,75);
+    const can=new Canvas(canva,75);
     const but=document.getElementById("new")
-    but.addEventListener()
+
+        let figlines=[]
+    function wrapper(){
+        figlines=[]
+        let input=rand.value
+        console.log(but.value)
+        for(let i=0;i<input;i++){
+            figlines.push(new Line(getRandomArbitrary(-10,10),getRandomArbitrary(-10,10)))
+            //console.log(i)
+        }
+        console.log(figlines)
+        console.log(can)
+        can.figtocanvasline(figlines)
+    }
+    but.addEventListener("click",wrapper)
 </script>
 </html>

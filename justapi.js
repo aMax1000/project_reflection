@@ -1,4 +1,9 @@
 
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+
 const maxrenderscale=32767;
 const maxsafevalue=Number.MAX_SAFE_INTEGER/(2*maxrenderscale)
 
@@ -440,11 +445,13 @@ renderbreakpoints(){
     }
 }
 
-figtocanvas(figlines){
+figtocanvasline(figlines){
     this.fig=new Fig;
+    console.log(this.fig)
     for(let line in figlines){
         this.fig.addlinef(line);
     }
+    console.log(this.fig)
     this.figtocanvas()
 }
 
