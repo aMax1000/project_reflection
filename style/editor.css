@@ -30,7 +30,6 @@ main{
 
     display: flex;
     flex-direction: row;
-    gap: 16px;
     padding: var(--padding-default);
     align-items: center;
     .button-wrapper{
@@ -58,9 +57,9 @@ main{
         appearance: none;
         padding-top: 6px;
         padding-bottom: 6px;
-        padding-left: 16px;
         border-left: 1px solid var(--secondary);
         transition: var(--transition-fast);
+        width: 200px;
         li{
             appearance: none;
             list-style: none;
@@ -89,7 +88,7 @@ main{
 /* ----- TOP MENU SUB MENUS ----- */
 .top-menu ul li  {
     position: relative;
-    width: 100%;
+    width: 96%;
 }
 .top-menu ul .sub-menu {
     display: none;
@@ -127,7 +126,6 @@ main{
 }
 .top-menu li p {
     display: block;
-    background: var(--primary);
 }
 .top-menu ul p:hover {
     transition: var(--transition-fast);
@@ -139,7 +137,7 @@ main{
     padding-top: 4px;
     border-top: none;
     position: absolute;
-    left: 0; /* ----------- HERE NEEDS FIXING, IT'S REALLY INCONSISTENT ACROSS DIFFERENT ELEMETNS --------------- */
+    left: 4px;
     min-width: 100%;
 }
 .top-menu li {
@@ -159,6 +157,7 @@ main{
     padding: 16px;
     padding-top: 12px;
     border: var(--accent-border);
+    border-top: none;
 }
 
 /* ----- LEFT MENU ----- */
