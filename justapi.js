@@ -470,8 +470,8 @@ figtocanvas(){
         console.log(startj)
         let endj=Math.min(this.canvas.width,parseInt(this.fig.arrup.linearr[ittup].funct(currenti)*this.renderscale)+this.offsetx)
         console.log(endj)
-        track+=startj*4
         if(startj<endj){
+            track+=startj*4
         for(let j=startj;j<endj;j++){
             if(j>=startj && j<=endj){
             dis2[track]=(0x00)
