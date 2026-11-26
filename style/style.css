@@ -1,4 +1,7 @@
 :root{
+    font-size: 14pt;
+    --font-decorative: "Roboto Mono", monospace;
+
     --primary: rgb(255, 255, 255);
     --primary-text: rgb(0, 0, 0);
 
@@ -12,8 +15,8 @@
     --accent-faded: rgb(249, 175, 75);
     --accent-text: rgb(0, 0, 0);
 
-    --glass-bg: rgba(172, 240, 208, 0.4);
-    --glass-border: 1px solid rgba(172, 240, 208, 0.4);
+    --glass-bg: rgba(122, 246, 174, 0.4);
+    --glass-border: 1px solid rgba(122, 246, 174, 0.4);
     --glass-text: rgb(0, 0, 0);
     --glass-backdrop-filter: blur(4px);
 
@@ -22,20 +25,19 @@
     --padding-default: 12px 20px;
 }
 *, *::before, *::after{
+    font-family: "Roboto", sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-decoration: none;
 }
 body{
     display: flex;
     flex-direction: column;
     height: 100vh;
     margin: 0;
-    /* TEMPORARY */
-    /* background-image: url(../imgs/inspo1.png);
-    background-repeat: no-repeat;
-    background-size: cover; */
     background-color: var(--primary);
+    transition: var(--transition);
 }
 .glass{
     background: var(--glass-bg);
@@ -50,11 +52,23 @@ header{
     justify-content: space-between;
     align-items: center;
     padding: var(--padding-default);
-    .radio-choice{
-        input[type="radio"] {  
-            appearance: none;
-            margin: 0;
+    .theme-switch{
+        appearance: none;
+        -webkit-appearance: none;
+        background: none;
+        border: none;
+        min-height: 30px;
+        height: 100%;
+        width: auto;
+        transition: var(--transition-fast);
+        img{
+            height: 100%;
+            width: auto;
         }
+    }
+    .theme-switch:hover{
+        transform: scale(1.05);
+        transform-origin: center;
     }
 }
 main{
@@ -63,16 +77,39 @@ main{
     flex-grow: 1;
     align-content: center;
     text-align: center;
-    h1, h2{
+    h1, .hero-title h2{
         color: var(--primary-text);
+        font-family: var(--font-decorative);
+        font-weight: bold;
     }
     h1{
         font-size: 7.5rem;
         margin-bottom: 25px;
         margin: 0;
     }
-    h2{
+    .hero-title h2{
         font-size: 4rem;
         margin: 0 0 20px 0;
+    }
+    .hero-title button{
+        margin-top: 40px;
+        font-size: 1.8rem;
+        transition: var(--transition-fast);
+        border: var(--secondary-border);
+        border-radius: 12px;
+        background-color: var(--secondary);
+        padding: 16px;
+        a{
+            color: var(--secondary-text);
+        }
+    }
+    .hero-title button:hover{
+        background-color: var(--accent);
+        border: var(--accent-border);
+        transform: scale(1.05);
+        transform-origin: center;
+        a{
+            color: var(--accent-text);
+        }
     }
 }

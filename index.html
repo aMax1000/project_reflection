@@ -4,27 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Reflection</title>
+    <!-- ROBOTO MONO -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <!-- ROBOTO REGULAR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- STYLE -->
     <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
     <header class="glass">
-        <div class="radio-choice">
-            <input type="radio" name="language" id="eng">
-            <label for="eng"><img src="#"></label>
-            <input type="radio" name="language" id="ukr">
-            <label for="ukr"><img src="#"></label>
-        </div>
-        <div class="radio-choice">
-            <input type="radio" name="theme" id="light">
-            <label for="light"><img src="#"></label>
-            <input type="radio" name="theme" id="dark">
-            <label for="dark"><img src="#"></label>
-        </div>
+        <button class="theme-switch" id="light">
+            <img src="/imgs/theme-icon_light.svg">
+        </button>
+        <button class="theme-switch" id="dark">
+            <img src="/imgs/theme-icon_dark.svg">
+        </button>
     </header>
     <main>
         <div class="hero-title">
             <h2>Project</h2>
             <h1>Reflection</h1>
+            <a href="/editor.html"><button>Editor »</button></a>
         </div>
     </main>
 

@@ -1,10 +1,11 @@
 header{
     h1{
         font-size: 1rem;
+        font-weight: bold;
         transition: var(--transition);
         a{
-            text-decoration: none;
             color: var(--primary-text);
+            font-family: var(--font-decorative);
         }
     }
     h1:hover{
@@ -43,8 +44,10 @@ main{
         border-radius: 6px;
         background-color: var(--accent);
         color: var(--accent-text);
+        font-family: var(--font-decorative);
+        font-weight: bold;
 
-        padding: 8px;
+        padding: 8px 14px;
     }
     button:hover{
         background-color: var(--accent-faded);
@@ -195,9 +198,11 @@ main{
         gap: 12px;
         transition: var(--transition-fast);
         .section-title{
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             padding-bottom: 12px;
             border-bottom: 1px solid var(--secondary);
+            transition: var(--transition-fast);
+            font-family: var(--font-decorative);
         }
         label{
             font-size: 1rem;
@@ -206,6 +211,11 @@ main{
     .option:hover{
         transition: var(--transition-fast);
         border-top: var(--accent-border);
+        .section-title{
+            text-shadow: 0 0 20px var(--accent);
+            transform: scale(1.05);
+            transform-origin: center;
+        }
     }
     .option:hover + .option{
         transition: var(--transition-fast);
@@ -287,4 +297,5 @@ main{
 .canvas{
     flex-grow: 1;
     background-color: var(--secondary-faded);
+    transition: var(--transition);
 }

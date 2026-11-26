@@ -4,24 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Reflection</title>
+    <!-- ROBOTO MONO -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    <!-- ROBOTO REGULAR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- STYLE -->
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/editor.css">
 </head>
 <body>
     <header class="glass">
-        <div class="radio-choice">
-            <input type="radio" name="language" id="eng">
-            <label for="eng"><img src="#"></label>
-            <input type="radio" name="language" id="ukr">
-            <label for="ukr"><img src="#"></label>
-        </div>
+        <button class="theme-switch" id="light">
+            <img src="/imgs/theme-icon_light.svg">
+        </button>
         <h1><a href="index.html">Project Reflection</a></h1>
-        <div class="radio-choice">
-            <input type="radio" name="theme" id="light">
-            <label for="light"><img src="#"></label>
-            <input type="radio" name="theme" id="dark">
-            <label for="dark"><img src="#"></label>
-        </div>
+        <button class="theme-switch" id="dark">
+            <img src="/imgs/theme-icon_dark.svg">
+        </button>
     </header>
 
     <main>
@@ -66,10 +69,9 @@
             <ul class="option"><li>Test1</li></ul>
             <ul class="option"><li>Test2</li></ul>
             <ul class="option"><li>3</li></ul>
-            <ul class="option"><li>Test4</li></ul>
             
             <div class="button-wrapper">
-                <button>button</button>
+                <button>Next »</button>
             </div>
         </nav>
         <div class="editor-wrapper">
@@ -90,8 +92,14 @@
                         <input type="checkbox">
                     </div>
                 </div>
-                <div class="option">Test3</div>
-                <div class="option">Test4</div>
+                <div class="option">
+                    <p class="section-title">Title 1</p>
+                    Test3
+                </div>
+                <div class="option">
+                    <p class="section-title">Title 1</p>
+                    Test4
+                </div>
 
                 <div class="option">Test1</div>
                 <div class="option">Test2</div>
