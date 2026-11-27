@@ -13,10 +13,21 @@
     </canvas>
     <button id="new">новая фигура</button>
     <input autofocus=true name="rand" value="4">
-
+    <div id="parent"></div>
 </body>
+<template id="productrow">
+    <div>
+        <span class="span"></span>
+            <canvas class="canv"
+            width="300" 
+            height="300" 
+            style="border:3px solid">
+    </canvas>
+    </div>
+    </template>
 <script src="justapi.js"></script>
 <script defer>
+
     const rand=document.getElementsByName("rand")[0]
     console.log(rand)
     const canva = document.getElementById('test2');
@@ -28,15 +39,25 @@
 
         let figlines=[]
     function wrapper(){
+        const template = document.querySelector("#productrow");
         figlines=[]
         let input=rand.value
         console.log(but.value)
+        const parent = document.getElementById("parent")
         for(let i=0;i<input;i++){
+            console.log(`============ELEMENT ${i}============`)
             figlines.push(new Line(getRandomArbitrary(-10,10),getRandomArbitrary(-10,10)))
-            //console.log(i)
+            const clone = template.content.cloneNode(true);
+            const insideclone=clone.children[0]
+            console.log(insideclone)
+            const canv=insideclone.getElementsByClassName("canv")[0]
+            const canvell=new Canvas(canv,10);
+            const span=insideclone.getElementsByClassName("span")[0]
+            span.innerText=i;
+            canvell.figtocanvasline(figlines)
+            canvell.renderlines()
+            parent.appendChild(clone)
         }
-        console.log(figlines)
-        can.figtocanvasline(figlines)
         can.renderlines()
     }
     but.addEventListener("click",wrapper)
