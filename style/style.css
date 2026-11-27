@@ -1,28 +1,51 @@
+@media (prefers-color-scheme: dark){
+    :root{
+        --primary: rgb(0, 0, 0);
+        --primary-text: rgb(255, 255, 255);
+
+        --secondary: rgb(21, 118, 95);
+        --secondary-border: 1px solid rgb(10, 81, 71);
+        --secondary-faded: rgb(2, 56, 54);
+        --secondary-text: rgb(255, 255, 255);
+
+        --accent: rgb(249, 175, 75);
+        --accent-border: 1px solid rgb(192, 79, 23);
+        --accent-faded: rgb(220, 117, 55);
+        --accent-text: rgb(0, 0, 0);
+
+        --glass-bg: rgba(2, 56, 54, 0.4);
+        --glass-border: 1px solid rgba(2, 56, 54, 0.4);
+        --glass-text: rgb(255, 255, 255);
+    }
+}
+@media (prefers-color-scheme: light){
+    :root{
+        --primary: rgb(255, 255, 255);
+        --primary-text: rgb(0, 0, 0);
+
+        --secondary: rgb(122, 246, 174);
+        --secondary-border: 1px solid rgb(21, 118, 95);
+        --secondary-faded: rgb(72, 196, 148);
+        --secondary-text: rgb(0, 0, 0);
+
+        --accent: rgb(255, 253, 112);
+        --accent-border: 1px solid rgb(220, 117, 55);
+        --accent-faded: rgb(249, 175, 75);
+        --accent-text: rgb(0, 0, 0);
+
+        --glass-bg: rgba(122, 246, 174, 0.4);
+        --glass-border: 1px solid rgba(122, 246, 174, 0.4);
+        --glass-text: rgb(0, 0, 0);
+    }
+}
 :root{
     font-size: 14pt;
     --font-decorative: "Roboto Mono", monospace;
 
-    --primary: rgb(255, 255, 255);
-    --primary-text: rgb(0, 0, 0);
-
-    --secondary: rgb(122, 246, 174);
-    --secondary-border: 1px solid rgb(21, 118, 95);
-    --secondary-faded: rgb(72, 196, 148);
-    --secondary-text: rgb(0, 0, 0);
-
-    --accent: rgb(255, 253, 112);
-    --accent-border: 1px solid rgb(220, 117, 55);
-    --accent-faded: rgb(249, 175, 75);
-    --accent-text: rgb(0, 0, 0);
-
-    --glass-bg: rgba(122, 246, 174, 0.4);
-    --glass-border: 1px solid rgba(122, 246, 174, 0.4);
-    --glass-text: rgb(0, 0, 0);
-    --glass-backdrop-filter: blur(4px);
-
     --transition: all 0.5s ease;
     --transition-fast: all 0.2s ease;
     --padding-default: 12px 20px;
+    --glass-backdrop-filter: blur(4px);
 }
 *, *::before, *::after{
     font-family: "Roboto", sans-serif;
