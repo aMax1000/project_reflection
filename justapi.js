@@ -165,56 +165,41 @@ RNG.prototype.choice = function(array) {
         }
 
 
-        addline(line){
-            let ret=1;
+        linecrossing(line){
             if(this.linearr.length==0){
                 this.linearr[0]=line;
-                //console.log("d1")
-                return 4
+                return [-1,0]
             }
             let p1
             let p2
             if(this.b){
                 p1=this.findcrossalt(line)
-                if(p1==-2){return 0}
+                if(p1==-2){return [-2,-2]}
                 p2=this.findcrossrev(line)
-                if(p2==-2){return 0}
+                if(p2==-2){return [-2,-2]}
             }else{
                 p1=this.findcross(line)
-                if(p1==-2){return 0}
+                if(p1==-2){return [-2,-2]}
                 p2=this.findcrossrevalt(line)
-                if(p2==-2){return 0}
+                if(p2==-2){return [-2,-2]}
             }
             if(p2-p1<1){ console.log("ERROR p1-p2")}
-            let counter=p2-p1-1;
-           // console.log(!counter)
+            return [p1,p2];
             
-            let inter1;
-            let inter2;
-            if(p1!=-1){
-                inter1=line.intersectionx(this.linearr[p1]);
-            }else{
-                inter1=-maxsafevalue
-                ret=2
-            }
-            if(p2!=this.linearr.length){
-                inter2=line.intersectionx(this.linearr[p2]);
-                
-            }else{
-                inter2=maxsafevalue
-                if(ret==2){
-                    ret=4
-                }else{
-                    ret=3
-                }
-            }
-            if(inter1!=inter2){
-                this.secup.splice(p1+1,counter+1,inter1,inter2)
-                this.linearr.splice(p1+1,counter,line)
-            }
-            return ret;
         }
-
+        splicer(cas,inter1,inter2,p1,p2){
+            switch(cas){
+                case 0:
+                    this.secup.splice(p1+1,counter+1,inter1,inter2)
+                    this.linearr.splice(p1+1,counter,line)
+                    break;
+                case 1:
+                    this.secup.splice(p1+1,counter+1,inter1,inter2)
+                    this.linearr.splice(p1+1,counter,line)
+                    break;
+            }
+            
+        }
         strprint(){
             let a= `sec:${this.secup[0]}\n\n`
             for(let i=0;i<this.linearr.length;i++){
@@ -225,6 +210,71 @@ RNG.prototype.choice = function(array) {
                 a+=`sec: ${this.secup[1]}\n`
             }
             return a
+        }
+        cut(line){
+            console.log("cut")
+            if(this.linearr.length!=0){
+                console.log("cut2")
+                if(line.coef>this.linearr[0].coef){
+                    console.log("cut3")
+                    let index=this.findcrossalt(line)
+                    console.log(`index:${index}`)
+                    const intersect=line.intersectionx(this.linearr[index])
+                    this.secup.splice(0,index+1,intersect)
+                    this.linearr.splice(0,index)
+                    this.intersectup=intersect
+                    return intersect;
+                }
+            }
+        }
+        cutrev(line){
+            console.log("cutrev")
+            if(this.linearr.length!=0){
+                console.log("cutrev2")
+                if(line.coef<this.linearr[this.linearr.length-1].coef){
+                    console.log("cutrev3")
+                    let index=this.findcrossrev(line)
+                    console.log(`index:${index}`)
+                    const intersect=line.intersectionx(this.linearr[index])
+                    this.secup.splice(index+1,this.secup.length-index,intersect)
+                    this.linearr.splice(index+1,this.linearr.length-index)
+                    this.intersectdown=intersect
+                    return intersect;
+                }
+            }
+        }
+
+        cutalt(line){
+            console.log("cutalt")
+            if(this.linearr.length!=0){
+                console.log("cutalt2")
+                console.log(line)
+                console.log(this.linearr[0])
+                if(line.coef<this.linearr[0].coef){
+                    console.log("cutalt3")
+                    let index=this.findcross(line)
+                    console.log(`index:${index}`)
+                    const intersect=line.intersectionx(this.linearr[index])
+                    this.secup.splice(0,index+1,intersect)
+                    this.linearr.splice(0,index)
+                    this.intersectup=intersect
+                    return intersect;
+                }
+            }
+        }
+        cutrevalt(line){
+            console.log("cutrevalt")
+            if(this.linearr.length!=0){
+                if(line.coef>this.linearr[this.linearr.length-1].coef){
+                    let index=this.findcrossrevalt(line)
+                    console.log(`index:${index}`)
+                    const intersect=line.intersectionx(this.linearr[index])
+                    this.secup.splice(index+1,this.secup.length-index,intersect)
+                    this.linearr.splice(index+1,this.linearr.length-index)
+                    this.intersectdown=intersect
+                    return intersect;
+                }
+            }
         }
     }
 
@@ -251,92 +301,69 @@ RNG.prototype.choice = function(array) {
             }*/
         }
 
-        cut(line){
-            //console.log("cut")
-            if(this.arrdown.linearr.length!=0){
-                //console.log("cut2")
-                if(line.coef>this.arrdown.linearr[0].coef){
-                    //console.log("cut3")
-                    let index=this.arrdown.findcrossalt(line)
-                    console.log(`index:${index}`)
-                    const intersect=line.intersectionx(this.arrdown.linearr[index])
-                    this.arrup.secup[0]=intersect
-                    this.arrdown.secup.splice(0,index+1,intersect)
-                    this.arrdown.linearr.splice(0,index)
-                    this.intersectup=intersect
+        
+
+        spicingup(coordpair){
+            if(coordpair==[-2,-2]){return}
+            const p1=coordpair[0]
+            const p2=coordpair[1]
+            const counter=p2-p1-1;
+            if(counter<0){console.log("something went very wrong in linefinder")}
+            let inter1;
+            let inter2;
+            var b=false;
+            var ret=0;
+            if(p1!=-1){
+                inter1=line.intersectionx(this.arryp.linearr[p1]);
+            }else{
+                inter1=this.arrdown.cutalt()
+                b=true;
+            }
+            if(p2!=this.linearr.length){
+                inter2=line.intersectionx(this.arrup.linearr[p2]);
+                b=false;
+            }else{
+                inter2=this.arrdown.cutrevalt()
+            }
+            if(inter1!=inter2){
+                if(b && this.linearr.length==0){
+                    this.arrup.secup.splice(0,2,inter1,inter2)
+                }else{
+                    this.arrup.secup.splice(p1+1,counter+1,inter1,inter2)
                 }
+                this.arrup.linearr.splice(p1+1,counter,line)
             }
         }
-        cutrev(line){
-            console.log("cutrev")
-            if(this.arrdown.linearr.length!=0){
-                console.log("cutrev2")
-                if(line.coef<this.arrdown.linearr[this.arrdown.linearr.length-1].coef){
-                    console.log("cutrev3")
-                    let index=this.arrdown.findcrossrev(line)
-                    console.log(`index:${index}`)
-                    const intersect=line.intersectionx(this.arrdown.linearr[index])
-                    this.arrup.secup[this.arrup.secup.length-1]=intersect
-                    this.arrdown.secup.splice(index+1,this.arrdown.secup.length-index,intersect)
-                    this.arrdown.linearr.splice(index+1,this.arrdown.linearr.length-index)
-                    this.intersectdown=intersect
-                }
+
+        spicingdown(coordpair){
+            if(coordpair==[-2,-2]){return}
+            const p1=coordpair[0]
+            const p2=coordpair[1]
+            const counter=p2-p1-1;
+            let inter1;
+            let inter2;
+            var ret=0;
+            if(p1!=-1){
+                inter1=line.intersectionx(this.arrdown.linearr[p1]);
+            }else{
+                inter1=this.arrup.cutalt()
+                ret+=1;//2^0
             }
-        }
-        cutalt(line){
-            console.log("cutalt")
-            if(this.arrup.linearr.length!=0){
-                console.log("cutalt2")
-                console.log(line)
-                console.log(this.arrup.linearr[0])
-                if(line.coef<this.arrup.linearr[0].coef){
-                    console.log("cutalt3")
-                    let index=this.arrup.findcross(line)
-                    console.log(`index:${index}`)
-                    const intersect=line.intersectionx(this.arrup.linearr[index])
-                    this.arrdown.secup[0]=intersect
-                    this.arrup.secup.splice(0,index+1,intersect)
-                    this.arrup.linearr.splice(0,index)
-                    this.intersectup=intersect
-                }
+            if(p2!=this.linearr.length){
+                inter2=line.intersectionx(this.arrdown.linearr[p2]);
+            }else{
+                inter2=this.arrup.cutrevalt()
+                ret+=2;//2^1
             }
-        }
-        cutrevalt(line){
-            console.log("cutrevalt")
-            if(this.arrup.linearr.length!=0){
-                if(line.coef>this.arrup.linearr[this.arrup.linearr.length-1].coef){
-                    let index=this.arrup.findcrossrevalt(line)
-                    console.log(`index:${index}`)
-                    const intersect=line.intersectionx(this.arrup.linearr[index])
-                    this.arrdown.secup[this.arrdown.secup.length-1]=intersect
-                    this.arrup.secup.splice(index+1,this.arrup.secup.length-index,intersect)
-                    this.arrup.linearr.splice(index+1,this.arrup.linearr.length-index)
-                    this.intersectdown=intersect
-                }
+            if(inter1!=inter2){
+                this.secup.splice(p1+1,counter+1,inter1,inter2)
+                this.linearr.splice(p1+1,counter,line)
             }
         }
 
         addlinef(line){
             if(line.move>0){
-                switch(this.arrup.addline(line)){
-                    case 0:
-                        return;
-                    case 1:
-                        return;
-                    case 2:
-                        console.log("CASE 1 2")
-                        this.cut(line)
-                        break;
-                    case 3:
-                        console.log("CASE 1 3")
-                        this.cutrev(line)
-                        break;
-                    case 4:
-                        console.log("CASE 1 4")
-                        this.cut(line)
-                        this.cutrev(line)
-                        break;
-                }
+                
             }else if(line.move<0){
                 switch(this.arrdown.addline(line)){
                     case 0:
@@ -353,8 +380,9 @@ RNG.prototype.choice = function(array) {
                         break;
                     case 4:
                         console.log("CASE 2 4")
-                        this.cutalt(line)
+                        this.cutalt(line) 
                         this.cutrevalt(line)
+                          
                         break;
                 }
             }else{
