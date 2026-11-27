@@ -1,8 +1,5 @@
-// LIGHT AND DARK THEMES
-let light = document.getElementById("light");
-let dark = document.getElementById("dark");
-
-light.addEventListener("click", function(){
+// THEME CHANGE FUNCTIONS
+function lightTheme(){
     document.documentElement.style.setProperty('--primary', 'rgb(255, 255, 255)');
     document.documentElement.style.setProperty('--primary-text', 'rgb(0, 0, 0)');
 
@@ -19,9 +16,11 @@ light.addEventListener("click", function(){
     document.documentElement.style.setProperty('--glass-bg', 'rgba(122, 246, 174, 0.4)');
     document.documentElement.style.setProperty('--glass-border', '1px solid rgba(122, 246, 174, 0.4)');
     document.documentElement.style.setProperty('--glass-text', 'rgb(0, 0, 0)');
-} );
-
-dark.addEventListener("click", function(){
+    // SAVE THEME INTO LOCAL STORAGE
+    localStorage.removeItem('theme');
+    localStorage.setItem('theme', 'light');
+}
+function darkTheme(){
     document.documentElement.style.setProperty('--primary', 'rgb(0, 0, 0)');
     document.documentElement.style.setProperty('--primary-text', 'rgb(255, 255, 255)');
 
@@ -37,5 +36,21 @@ dark.addEventListener("click", function(){
     
     document.documentElement.style.setProperty('--glass-bg', 'rgba(2, 56, 54, 0.4)');
     document.documentElement.style.setProperty('--glass-border', '1px solid rgba(2, 56, 54, 0.4)');
-    document.documentElement.style.setProperty('--glass-text', 'rgb(0, 0, 0)');
-} );
+    document.documentElement.style.setProperty('--glass-text', 'rgb(255, 255, 255)');
+    // SAVE THEME INTO LOCAL STORAGE
+    localStorage.removeItem('theme');
+    localStorage.setItem('theme', 'dark');
+}
+
+// THEME BUTTONS
+let lightBtn = document.getElementById("light");
+let darkBtn = document.getElementById("dark");
+lightBtn.addEventListener("click", lightTheme);
+dark.addEventListener("click", darkTheme);
+
+// GET THEME FROM LOCAL STORAGE AND APPLY IT
+if (localStorage.getItem('theme') === 'dark'){
+    darkTheme();
+} else if (localStorage.getItem('theme') === 'light'){
+    lightTheme();
+}
