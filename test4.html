@@ -23,7 +23,7 @@
     const cont = canva.getContext('2d')
     cont.fillStyle="rgb(255,255,255)";
     cont.fillRect(0, 0, 500, 500);
-    const can=new Canvas(canva,75);
+    const can=new Canvas(canva,20);
     const but=document.getElementById("new")
 
         let figlines=[]
@@ -36,8 +36,8 @@
             //console.log(i)
         }
         console.log(figlines)
-        console.log(can)
         can.figtocanvasline(figlines)
+        can.renderlines()
     }
     but.addEventListener("click",wrapper)
 </script>

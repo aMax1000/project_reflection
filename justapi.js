@@ -79,14 +79,9 @@ const maxsafevalue=Number.MAX_SAFE_INTEGER/(2*maxrenderscale)
                 return -1
             }
             while(i<this.linearr.length && line.coef<this.linearr[i].coef){
-                        //console.log("e3")
-                        //console.log(line.intersectionx(this.linearr[i]))
-                        //console.log(this.secup[i+1])
-                        //main checker
                         if (line.intersectionx(this.linearr[i])<=this.secup[i+1]){
                             return i;
                         }
-                        //console.log("e6")
                         i++
                 }
                 return -2
@@ -94,23 +89,15 @@ const maxsafevalue=Number.MAX_SAFE_INTEGER/(2*maxrenderscale)
 
 
          findcrossrev(line){
-            //console.log(`t2`)
             let i=this.linearr.length-1
-            //console.log(`this.secup[i] ${this.secup[i]}`)
             if(line.coef>this.linearr[i].coef){return this.linearr.length}
-            if(line.coef==this.linearr[i].coef && line.move>this.linearr[i].move){
- return this.linearr.length
+            if(line.coef==this.linearr[i].coef && line.move<this.linearr[i].move){
+                return this.linearr.length
             }
-            //console.log(`t21`)
             while(i>=0 && line.coef<this.linearr[i].coef){
-                        //console.log("e3")
-                        //console.log(line.intersectionx(this.linearr[i]))
-                        //console.log(this.secup[i+1])
-                        //main checker
                         if (line.intersectionx(this.linearr[i])<=this.secup[i+1]){
                             return i;
                         }
-                        //console.log("e6")
                         i--
                 }
                 return -2
@@ -119,21 +106,14 @@ const maxsafevalue=Number.MAX_SAFE_INTEGER/(2*maxrenderscale)
         
         findcrossalt(line){
             let i=0
-            //console.log(`t3`)
             if(line.coef<this.linearr[i].coef){return -1}
-            //console.log(`t31`)
-            if(line.coef==this.linearr[i].coef && line.move<this.linearr[i].move){
+            if(line.coef==this.linearr[i].coef && line.move>this.linearr[i].move){
                 return -1
             }
             while(i<this.linearr.length && line.coef>this.linearr[i].coef){
-                        //console.log("e3")
-                        //main checker
-                        //console.log(line.intersectionx(this.linearr[i]))
-                        //console.log(this.secup[i])
                         if (line.intersectionx(this.linearr[i])>=this.secup[i]){
                             return i;
                         }
-                        //console.log("e6")
                         i++
                 }
                 return -2
@@ -142,22 +122,16 @@ const maxsafevalue=Number.MAX_SAFE_INTEGER/(2*maxrenderscale)
 
         findcrossrevalt(line){
             let i=this.linearr.length-1
-            //console.log(`t4`)
             if(line.coef<this.linearr[i].coef){
                     return this.linearr.length
                 }
-            if(line.coef==this.linearr[i].coef && line.move<this.linearr[i].move){
+            if(line.coef==this.linearr[i].coef && line.move>this.linearr[i].move){
                 return this.linearr.length
             }
             while(i>=0 && line.coef>this.linearr[i].coef){
-                        //console.log("e3")
-                        //console.log(line.intersectionx(this.linearr[i]))
-                        //console.log(this.secup[i])
-                        //main checker
                         if (line.intersectionx(this.linearr[i])>=this.secup[i]){
                             return i;
                         }
-                        //console.log("e6")
                         i--
                 }
                 return -2
@@ -448,7 +422,7 @@ renderbreakpoints(){
 figtocanvasline(figlines){
     this.fig=new Fig;
     console.log(this.fig)
-    for(let line in figlines){
+    for(let line of figlines){
         this.fig.addlinef(line);
     }
     console.log(this.fig)
@@ -467,25 +441,34 @@ figtocanvas(){
     let ibase=parseInt(Math.max(0,(this.fig.intersectup*this.renderscale+this.offsety)))
     let currenti=-(this.offsety-ibase)/this.renderscale
     let track=ibase*this.canvas.height*4;
+    let startj
+    let endj
     //console.log(currenti*this.canvas.height*4)
     //console.log(this.fig.intersectup*this.renderscale+this.offsety)
     //console.log(5)
     //console.log(ibase)
     //console.log(this.fig.intersectdown*this.renderscale+this.offsety)
     for(let i=ibase;i<Math.min(this.canvas.height,this.fig.intersectdown*this.renderscale+this.offsety);i++){
-         //console.log(5.5)
-        while(this.fig.arrup.secup[ittup+1]<currenti){
-            ittup++
+         
+            while(this.fig.arrup.secup[ittup+1]<currenti){
+                ittup++
+            }
+            while(this.fig.arrdown.secup[ittdown+1]<currenti){
+                ittdown++
+            }
+        if(this.fig.arrup.linearr.length!=0){
+            endj=Math.min(this.canvas.width,parseInt(this.fig.arrup.linearr[ittup].funct(currenti)*this.renderscale)+this.offsetx)
+        }else{
+            endj=this.canvas.width
         }
-        while(this.fig.arrdown.secup[ittdown+1]<currenti){
-            ittdown++
+
+        if(this.fig.arrdown.linearr.length!=0){
+            startj=Math.max(0,parseInt(this.fig.arrdown.linearr[ittdown].funct(currenti)*this.renderscale)+this.offsetx)
+        }else{
+            startj=0;
         }
-        //console.log(this.fig.arrdown.linearr[ittdown])
-        //console.log(ittdown)
-        let startj=Math.max(0,parseInt(this.fig.arrdown.linearr[ittdown].funct(currenti)*this.renderscale)+this.offsetx)
-        //console.log(startj)
-        let endj=Math.min(this.canvas.width,parseInt(this.fig.arrup.linearr[ittup].funct(currenti)*this.renderscale)+this.offsetx)
-        //console.log(endj)
+        
+        
         if(startj<endj){
             track+=startj*4
         for(let j=startj;j<endj;j++){
